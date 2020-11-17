@@ -1,10 +1,13 @@
-var express = require("express");
-var router = express.Router();
-const { APP_NAME } = process.env;
+const express = require("express");
+const router = express.Router();
+const verifyToken = require("../middlewares/verifyToken");
 
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.send(APP_NAME);
-});
+const usersHandler = require("./handler/users");
+
+router.post("/register", usersHandler.register);
+router.post("/login", usersHandler.login);
+router.post("/logout", verifyToken, usersHandler.logout);
+router.put("/", verifyToken, usersHandler.update);
+router.get("/", verifyToken, usersHandler.getUser);
 
 module.exports = router;
