@@ -1,4 +1,3 @@
-const { default: Axios } = require("axios");
 const axios = require("axios");
 const { TIMEOUT } = process.env;
 
